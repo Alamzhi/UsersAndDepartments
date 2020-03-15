@@ -1,4 +1,6 @@
-﻿namespace UsersAndDepartments.Entities
+﻿using System.Collections.Generic;
+
+namespace UsersAndDepartments.Entities
 {
 	/// <summary>
 	/// Отдел
@@ -14,5 +16,10 @@
 		/// Наименование
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Пользователи
+		/// </summary>
+		public List<User> Users { get; } = new List<User>();
 	}
 }
