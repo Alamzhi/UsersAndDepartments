@@ -18,6 +18,8 @@ namespace DepartmentsAndDepartments.Controllers
 	{
 		private readonly ILogger<DepartmentController> _logger;
 
+		public DepartmentController() { }
+
 		public DepartmentController(ILogger<DepartmentController> logger)
 		{
 			_logger = logger;
@@ -43,14 +45,14 @@ namespace DepartmentsAndDepartments.Controllers
 		{
 			using (var context = new UserContext())
 			{
-				var Department = context.Departments.SingleOrDefault(d => d.Id == id);
+				var department = context.Departments.SingleOrDefault(d => d.Id == id);
 
-				if (Department == null)
+				if (department == null)
 				{
 					return NotFound();
 				}
 
-				return Department;
+				return department;
 			}
 		}
 
@@ -58,13 +60,13 @@ namespace DepartmentsAndDepartments.Controllers
 		/// Создание отдела
 		/// </summary>
 		[HttpPost]
-		public ActionResult Create(Department Department)
+		public CreatedAtActionResult Create(Department department)
 		{
 			using (var context = new UserContext())
 			{
-				context.Departments.Add(Department);
+				context.Departments.Add(department);
 				context.SaveChanges();
-				return CreatedAtAction(nameof(Get), new { id = Department.Id }, Department);
+				return CreatedAtAction(nameof(Get), new { id = department.Id }, department);
 			}
 		}
 
@@ -107,20 +109,20 @@ namespace DepartmentsAndDepartments.Controllers
 		/// Удаление отдела
 		/// </summary>
 		[HttpDelete("{id}")]
-		public ActionResult<Department> Delete(int id)
+		public ActionResult<Department> Delete(long id)
 		{
 			using (var context = new UserContext())
 			{
-				var Department = context.Departments.SingleOrDefault(d => d.Id == id);
+				var department = context.Departments.SingleOrDefault(d => d.Id == id);
 
-				if (Department==null)
+				if (department==null)
 				{
 					return NotFound();
 				}
 
-				context.Departments.Remove(Department);
+				context.Departments.Remove(department);
 				context.SaveChanges();
-				return Department;
+				return department;
 			}
 		}
 	}

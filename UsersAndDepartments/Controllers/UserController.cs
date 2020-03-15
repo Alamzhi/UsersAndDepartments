@@ -20,6 +20,10 @@ namespace UsersAndDepartments.Controllers
 	{
 		private readonly ILogger<UserController> _logger;
 
+		public UserController()
+		{
+		}
+
 		public UserController(ILogger<UserController> logger)
 		{
 			_logger = logger;
@@ -60,7 +64,7 @@ namespace UsersAndDepartments.Controllers
 		/// Создание пользователя
 		/// </summary>
 		[HttpPost]
-		public ActionResult Create(User user)
+		public CreatedAtActionResult Create(User user)
 		{
 			using (var context = new UserContext())
 			{
@@ -109,7 +113,7 @@ namespace UsersAndDepartments.Controllers
 		/// Удаление пользователя
 		/// </summary>
 		[HttpDelete("{id}")]
-		public ActionResult<User> Delete(int id)
+		public ActionResult<User> Delete(long id)
 		{
 			using (var context = new UserContext())
 			{
